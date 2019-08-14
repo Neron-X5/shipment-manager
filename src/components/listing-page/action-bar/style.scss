@@ -1,0 +1,65 @@
+@import '../../../configs/style/variable.scss';
+
+.action-bar {
+    margin-bottom: 20px;
+    height: 50px;
+    width: 100%;
+    padding: 5px 10px;
+    -webkit-box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.5);
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+
+    i {
+        font-size: 24px;
+        margin: 0 10px;
+    }
+
+    .filter-box {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-align: center;
+            -ms-flex-align: center;
+                align-items: center;
+        -webkit-box-pack: justify;
+            -ms-flex-pack: justify;
+                justify-content: space-between;
+        background-color: $backgroundColor;
+        border-radius: 2px;
+        -webkit-box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.5);
+                box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.5);
+        position: relative;
+        top: 110px;
+        left: -70px;
+        padding: 10px;
+        width: 250px;
+
+        .order i {
+            display: block;
+            margin: 10px;
+        }
+
+        .sortable {
+            color: $primaryThemeColor;
+            margin: 5px 0;
+        }
+
+        .active {
+            color: $secondaryThemeColor;
+        }
+    }
+
+    .search-input {
+        font-size: 1rem;
+        padding: 5px;
+        width: 250px;
+        border: 1px solid #808080;
+        border-radius: 2px;
+        line-height: 1em;
+    }
+}

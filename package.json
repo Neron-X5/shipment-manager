@@ -1,0 +1,78 @@
+{
+    "name": "shipment-manager",
+    "version": "1.0.0",
+    "description": "FreightHub Frontend Coding Challenge",
+    "author": "Neron-X5",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Neron-X5/shipment-manager.git"
+    },
+    "license": "MIT",
+    "scripts": {
+        "start": "npm-run-all -p server:watch client",
+        "client": "react-scripts start",
+        "server": "json-server public/db.json --port 3300",
+        "server:watch": "json-server --watch public/db.json --port 3300",
+        "test": "react-scripts test",
+        "build": "react-scripts build",
+        "bundle": "git bundle create bundle.bundle --all",
+        "eject": "react-scripts eject"
+    },
+    "dependencies": {
+        "normalize.css": "^8.0.1",
+        "prop-types": "^15.7.2",
+        "react": "^16.8.6",
+        "react-dom": "^16.8.6",
+        "react-redux": "^7.1.0",
+        "react-router-dom": "^5.0.1",
+        "react-scripts": "3.0.1",
+        "redux": "^4.0.4",
+        "redux-promise": "^0.6.0"
+    },
+    "devDependencies": {
+        "enzyme": "^3.10.0",
+        "enzyme-adapter-react-16": "^1.14.0",
+        "husky": "3.0.3",
+        "jest-enzyme": "^7.0.2",
+        "json-server": "0.15.0",
+        "lint-staged": "^9.2.1",
+        "node-sass": "^4.12.0",
+        "npm-run-all": "^4.1.5",
+        "prettier": "^1.18.2",
+        "react-test-renderer": "^16.8.6",
+        "redux-mock-store": "^1.5.3",
+        "stylelint": "^10.1.0"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "husky": {
+        "hooks": {
+            "pre-commit": "lint-staged"
+        }
+    },
+    "lint-staged": {
+        "*.js": [
+            "prettier --write --print-width 120 --tab-width 4 --single-quote",
+            "eslint --fix --max-warnings 3",
+            "git add"
+        ],
+        "*.scss": [
+            "prettier --write --print-width 120 --tab-width 4 --single-quote",
+            "stylelint --syntax scss  --fix",
+            "git add"
+        ]
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}
