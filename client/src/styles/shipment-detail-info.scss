@@ -1,0 +1,26 @@
+.shipment-detail-info-container {
+  margin-bottom: 10px;
+  &__name {
+    margin: 0;
+    font-size: 13px;
+    color: #ababab;
+  }
+
+  &__value {
+    margin: 0;
+    margin-top: 3px;
+    font-size: 18px;
+    color: #101010;
+    font-weight: 600;
+  }
+}
+
+ul {
+  border: 1px solid #ababab;
+  list-style-type: none;
+  padding: 10px;
+}
+
+li {
+  margin-bottom: 10px;
+}

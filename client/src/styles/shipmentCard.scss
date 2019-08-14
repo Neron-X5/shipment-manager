@@ -1,0 +1,41 @@
+.shipment-card-container {
+  box-shadow: 0 6px 8px 0 rgba(102, 119, 136, 0.16);
+  display: flex;
+  border-radius: 0.50rem;
+  flex-flow: column wrap;
+  align-items: center;
+  transition: box-shadow 0.5s;
+  padding: 1rem 1rem 0.5rem;
+  color: #707070;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 0 12px 16px rgba(0, 0, 0, 0.2);
+  } 
+}
+
+.shipment-card-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  
+  &__shipment-info {
+    font-weight: 500;
+    margin: 6px 0;
+    font-size: 15px;
+  }
+  
+  &__shipment-info-value {
+    font-weight: lighter;
+  }
+
+  &__shipment-name {
+    font-size: 15px;
+    margin-bottom: 5px;
+  }
+}
+
+@media (max-width: 850px) {
+  .card-container {
+    margin-bottom: 20px;
+  }
+}

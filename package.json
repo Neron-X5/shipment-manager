@@ -1,78 +1,80 @@
 {
-    "name": "shipment-manager",
-    "version": "1.0.0",
-    "description": "FreightHub Frontend Coding Challenge",
-    "author": "Neron-X5",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/Neron-X5/shipment-manager.git"
-    },
-    "license": "MIT",
-    "scripts": {
-        "start": "npm-run-all -p server:watch client",
-        "client": "react-scripts start",
-        "server": "json-server public/db.json --port 3300",
-        "server:watch": "json-server --watch public/db.json --port 3300",
-        "test": "react-scripts test",
-        "build": "react-scripts build",
-        "bundle": "git bundle create bundle.bundle --all",
-        "eject": "react-scripts eject"
-    },
-    "dependencies": {
-        "normalize.css": "^8.0.1",
-        "prop-types": "^15.7.2",
-        "react": "^16.8.6",
-        "react-dom": "^16.8.6",
-        "react-redux": "^7.1.0",
-        "react-router-dom": "^5.0.1",
-        "react-scripts": "3.0.1",
-        "redux": "^4.0.4",
-        "redux-promise": "^0.6.0"
-    },
-    "devDependencies": {
-        "enzyme": "^3.10.0",
-        "enzyme-adapter-react-16": "^1.14.0",
-        "husky": "3.0.3",
-        "jest-enzyme": "^7.0.2",
-        "json-server": "0.15.0",
-        "lint-staged": "^9.2.1",
-        "node-sass": "^4.12.0",
-        "npm-run-all": "^4.1.5",
-        "prettier": "^1.18.2",
-        "react-test-renderer": "^16.8.6",
-        "redux-mock-store": "^1.5.3",
-        "stylelint": "^10.1.0"
-    },
-    "eslintConfig": {
-        "extends": "react-app"
-    },
-    "husky": {
-        "hooks": {
-            "pre-commit": "lint-staged"
-        }
-    },
-    "lint-staged": {
-        "*.js": [
-            "prettier --write --print-width 120 --tab-width 4 --single-quote",
-            "eslint --fix --max-warnings 3",
-            "git add"
-        ],
-        "*.scss": [
-            "prettier --write --print-width 120 --tab-width 4 --single-quote",
-            "stylelint --syntax scss  --fix",
-            "git add"
-        ]
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
+  "name": "freighthub-frontend-challenge",
+  "version": "1.0.0",
+  "description": "FreightHub Frontend Coding Challenge",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rotimi-babalola/freighthub-frontend-challenge.git"
+  },
+  "author": "Rotimi Babalola",
+  "license": "MIT",
+  "scripts": {
+    "client:dev": "rm -rf client/dist && cross-env NODE_ENV=development env-cmd webpack-dev-server --open --hot",
+    "build:client-prod": "rm -rf client/dist && cross-env NODE_ENV=production env-cmd webpack",
+    "start": "json-server db.json",
+    "start:watch": "json-server --watch db.json",
+    "start:dev": "npm-run-all -p start:watch client:dev",
+    "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
+  },
+  "lint-staged": {
+    "*{.js,.ts,tsx}": [
+      "tslint --fix",
+      "git add"
+    ]
+  },
+  "dependencies": {
+    "@types/enzyme": "^3.9.1",
+    "@types/enzyme-adapter-react-16": "^1.0.5",
+    "@types/jest": "^24.0.12",
+    "@types/lodash": "^4.14.123",
+    "@types/react": "^16.8.16",
+    "@types/react-dom": "^16.8.4",
+    "@types/react-router-dom": "^4.3.3",
+    "axios": "^0.18.0",
+    "css-loader": "^2.1.1",
+    "env-cmd": "^9.0.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
+    "expect": "^24.8.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^24.8.0",
+    "json-server": "^0.14.2",
+    "lodash": "^4.17.11",
+    "mobx": "^5.9.4",
+    "mobx-react": "^5.4.3",
+    "optimize-css-assets-webpack-plugin": "^5.0.1",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "sass-loader": "^7.1.0",
+    "style-loader": "^0.23.1",
+    "ts-jest": "^24.0.2",
+    "typescript": "^3.4.5",
+    "uglifyjs-webpack-plugin": "^2.1.2",
+    "webpack": "^4.30.0",
+    "webpack-merge": "^4.2.1"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^5.2.1",
+    "babel-jest": "^24.8.0",
+    "cross-env": "^5.2.0",
+    "enzyme-to-json": "^3.3.5",
+    "husky": "^2.2.0",
+    "lint-staged": "^8.1.6",
+    "node-sass-chokidar": "^1.3.4",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.17.0",
+    "tslint": "^5.16.0",
+    "tslint-config-prettier": "^1.18.0",
+    "tslint-react": "^4.0.0",
+    "webpack-cli": "^3.3.2",
+    "webpack-dev-server": "^3.3.1"
+  }
 }
