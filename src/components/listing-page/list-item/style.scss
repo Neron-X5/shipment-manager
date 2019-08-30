@@ -1,0 +1,74 @@
+@import '../../../configs/style/variable.scss';
+
+.item-link {
+    &:link,
+    &:visited,
+    &:hover,
+    &:active {
+        text-decoration: none;
+        color: $colorFontPrimary;
+    }
+}
+
+.list-item {
+    height: 80px;
+    font-size: 1.2rem;
+    box-shadow: 0 2px 5px 1px rgba(0, 0, 0, 0.25);
+    border-radius: 2px;
+    margin: 10px 0;
+    padding: 10px;
+    display: flex;
+    align-items: flex-start;
+    overflow: hidden;
+
+    &.title {
+        align-items: center;
+        height: 50px;
+        font-weight: 600;
+        background-color: darken($backgroundColor, 10%);
+    }
+
+    .item-details {
+        width: 100%;
+        display: flex;
+
+        .item-col {
+            flex: 1;
+            padding: 0 5px;
+
+            &.id {
+                //
+            }
+
+            &.status {
+                &.active {
+                    color: $secondaryThemeColor;
+                }
+
+                &.completed {
+                    color: $primaryThemeColor;
+                }
+
+                &.new {
+                    color: purple;
+                }
+            }
+        }
+    }
+    .chevron {
+        padding: 20px 10px;
+    }
+
+    @media all and (max-width: 600px) {
+        font-size: 0.8rem;
+
+        .origin,
+        .total {
+            display: none;
+        }
+    }
+
+    @media all and (max-width: 991px) {
+        // height: 120px;
+    }
+}

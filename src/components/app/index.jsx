@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import ReduxStore from '../../reducers/store';
 
-import ShipmentContainer from '../listing-page/shipment-container';
-import ShipmentDetails from '../details-page/shipment-details';
+import ListContainer from '../listing-page';
+import Details from '../details-page';
 
 import './style.scss';
 
@@ -17,8 +17,8 @@ class AppComponent extends Component {
                 <Provider store={ReduxStore}>
                     <Router>
                         <Switch>
-                            <Route exact={true} path="/" render={props => <ShipmentContainer {...props} />} />
-                            <Route exact={true} path="/:shipmentId" render={props => <ShipmentDetails {...props} />} />
+                            <Route exact={true} path="/" render={props => <ListContainer {...props} />} />
+                            <Route exact={true} path="/:shipmentId" render={props => <Details {...props} />} />
                         </Switch>
                     </Router>
                 </Provider>

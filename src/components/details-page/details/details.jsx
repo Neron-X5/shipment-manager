@@ -3,31 +3,32 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import Notification from '../../notification';
-import { loadShipments, closeToast, renameShipment } from '../../../actions/shipment';
+import Notification from '../../common/notification';
+import { loadShipmentDetails, renameShipment, closeToast } from '../../../actions/details';
 import { capitalize } from '../../../utility/string-utils';
+import { APP_CONSTANTS } from '../../../configs/constants';
 
 import './style.scss';
 
-class ShipmentDetailsComponent extends Component {
+export class DetailsComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {};
     }
 
     componentDidMount() {
-        this.props.loadShipment(`shipments?q=${this.props.match.params.shipmentId}`);
+        this.props.loadShipmentDetails(this.props.match.params.shipmentId);
     }
 
     editName = () => {
-        const newName = prompt('Please enter Shipment name', this.props.shipments[0].name);
+        const newName = prompt('Please enter Shipment name', this.props.shipment.name);
         if (newName) {
-            this.props.renameShipment(this.props.shipments[0], this.props.match.params.shipmentId, newName);
+            this.props.renameShipment(this.props.shipment, this.props.match.params.shipmentId, newName);
         }
     };
 
     render() {
-        const { shipments, error } = this.props;
+        const { loading, shipment, error } = this.props;
         const {
             id = '',
             userId = '',
@@ -39,24 +40,27 @@ class ShipmentDetailsComponent extends Component {
             mode = '',
             cargo = [],
             services = []
-        } = shipments[0] || {};
+        } = shipment;
         return (
             <Fragment>
-                <main className="details-container">
-                    <Link to="/">
-                        <i className="fas fa-chevron-left chevron">{` Back`}</i>
-                    </Link>
-                    {!!shipments.length && (
-                        <Fragment>
-                            <i className="far fa-edit edit" onClick={this.editName}>{` Edit`}</i>
+                <main className="details-page">
+                    {loading && <div className="loading">Loading...</div>}
+                    <div className="details-container">
+                        <div className="action-bar">
+                            <Link to="/">
+                                <i className="fas fa-chevron-left chevron">{` Back`}</i>
+                            </Link>
+                            {!!shipment.id && <i className="far fa-edit edit" onClick={this.editName}>{` Edit`}</i>}
+                        </div>
+                        {!error && !!shipment.id && (
                             <div className="details">
-                                <div>
+                                <div className="shipment-id">
                                     Shipment ID: <code>{id}</code>
                                 </div>
                                 <div>
                                     Customer ID: <code>{userId}</code>
                                 </div>
-                                <div>
+                                <div className="name">
                                     Name: <code>{name}</code>
                                 </div>
                                 <div>
@@ -98,39 +102,36 @@ class ShipmentDetailsComponent extends Component {
                                     ))}
                                 </div>
                             </div>
-                        </Fragment>
-                    )}
+                        )}
+                    </div>
                 </main>
-                {error && (
-                    <Notification
-                        message={'Could not fetch the data. Please try again in a moment.'}
-                        clickHandler={closeToast}
-                    />
-                )}
+                <Notification displayStatus={error} message={APP_CONSTANTS.ERROR_MESSAGE} clickHandler={closeToast} />
             </Fragment>
         );
     }
 }
 
-ShipmentDetailsComponent.propTypes = {
+DetailsComponent.propTypes = {
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
-    shipments: PropTypes.array.isRequired
+    shipment: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    loading: state.list.loading || false,
-    error: state.list.error || false,
-    shipments: state.list.shipments || []
+    loading: state.details.loading || false,
+    error: state.details.error || false,
+    shipment: state.details.shipment || {}
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    loadShipment: url => dispatch(loadShipments(url)),
+    loadShipmentDetails: shipmentId => dispatch(loadShipmentDetails(shipmentId)),
     renameShipment: (shipment, shipmentId, name) => dispatch(renameShipment(shipment, shipmentId, name)),
     closeToast: () => dispatch(closeToast())
 });
 
-export default connect(
+const Container = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ShipmentDetailsComponent);
+)(DetailsComponent);
+
+export default Container;

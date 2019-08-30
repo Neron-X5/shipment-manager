@@ -4,17 +4,22 @@ import { shallow } from 'enzyme';
 import PaginationBar from './index';
 
 describe('PaginationBar Component', () => {
-    const props = {
-        page: 1,
-        limit: 20,
-        shipmentsLength: 10,
-        changePage: () => {
-            props.page += 1;
-        }
-    };
+    let props = {};
+    beforeEach(() => {
+        props = {
+            page: 1,
+            limit: 20,
+            shipmentsLength: 10,
+            changePage: jest.fn(() => {
+                props.page += 1;
+                return null;
+            })
+        };
+    });
 
     it('shallow renders without crashing', () => {
-        shallow(<PaginationBar {...props} />);
+        const wrapper = shallow(<PaginationBar {...props} />);
+        expect(wrapper).toBeDefined();
     });
 
     it('renders page number', () => {

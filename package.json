@@ -1,7 +1,7 @@
 {
     "name": "shipment-manager",
     "version": "1.0.0",
-    "description": "FreightHub Frontend Coding Challenge",
+    "description": "Demo application which enables the user to view and manage shipments",
     "author": "Neron-X5",
     "repository": {
         "type": "git",

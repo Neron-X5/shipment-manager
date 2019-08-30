@@ -3,21 +3,20 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { APP_CONSTANTS } from '../../../configs/constants';
-import { loadShipments, closeToast } from '../../../actions/shipment';
+import { loadShipments, closeToast } from '../../../actions/list';
 
+import Notification from '../../common/notification';
 import ActionBar from '../action-bar';
 import PaginationBar from '../pagination-bar';
-import Notification from '../../notification';
-import ShipmentList from '../shipment-list';
+import List from '../list';
 
 import './style.scss';
 
-class ShipmentContainerComponent extends Component {
+export class ListContainerComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
             page: 1,
-            limit: APP_CONSTANTS.PAGE_LIMIT,
             filterStatus: false,
             sortBy: '',
             orderBy: 'asc',
@@ -36,9 +35,7 @@ class ShipmentContainerComponent extends Component {
         sortBy = this.state.sortBy,
         orderBy = this.state.orderBy
     }) => {
-        this.props.loadShipments(
-            `shipments?q=${query}&_page=${page}&_limit=${this.state.limit}&_sort=${sortBy}&_order=${orderBy}`
-        );
+        this.props.loadShipments({ query, page, sortBy, orderBy });
     };
 
     toggleFilters = event => {
@@ -105,28 +102,22 @@ class ShipmentContainerComponent extends Component {
                             clearSearch={this.clearSearch}
                         />
                         <div className="list">
-                            <ShipmentList className="list" shipments={shipments} />
+                            <List className="list" shipments={shipments} />
                         </div>
                         <PaginationBar
                             page={this.state.page}
-                            limit={this.state.limit}
                             shipmentsLength={shipments.length}
                             changePage={this.changePage}
                         />
                     </Fragment>
                 )}
-                {error && (
-                    <Notification
-                        message={'Could not fetch the data. Please try again in a moment.'}
-                        clickHandler={closeToast}
-                    />
-                )}
+                <Notification displayStatus={error} message={APP_CONSTANTS.ERROR_MESSAGE} clickHandler={closeToast} />
             </main>
         );
     }
 }
 
-ShipmentContainerComponent.propTypes = {
+ListContainerComponent.propTypes = {
     loading: PropTypes.bool.isRequired,
     error: PropTypes.bool.isRequired,
     shipments: PropTypes.array.isRequired
@@ -139,11 +130,13 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadShipments: url => dispatch(loadShipments(url)),
+    loadShipments: params => dispatch(loadShipments(params)),
     closeToast: () => dispatch(closeToast())
 });
 
-export default connect(
+const Container = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ShipmentContainerComponent);
+)(ListContainerComponent);
+
+export default Container;

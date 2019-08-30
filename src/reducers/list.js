@@ -1,20 +1,20 @@
-const listReducer = (state = { loading: false, error: false, shipments: [] }, action) => {
+import { APP_CONSTANTS } from '../configs/constants';
+
+const defaultState = { loading: false, error: false, shipments: [] };
+
+const listReducer = (state = defaultState, action) => {
     switch (action.type) {
-        case 'LOADING': {
+        case APP_CONSTANTS.ACTION_TYPE.LIST_LOADING: {
             return { ...state, loading: action.payload };
         }
-        case 'LOAD_SHIPMENTS': {
+        case APP_CONSTANTS.ACTION_TYPE.LOAD_SHIPMENTS: {
             const { payload } = action;
             if (payload.length) {
                 return { ...state, loading: false, error: false, shipments: payload };
             }
             return { ...state, loading: false, error: true };
         }
-        case 'RENAME_SHIPMENT': {
-            const { payload } = action;
-            return { ...state, loading: false, error: false, shipments: payload };
-        }
-        case 'CLOSE_TOAST': {
+        case APP_CONSTANTS.ACTION_TYPE.CLOSE_LIST_TOAST: {
             return { ...state, error: false };
         }
         default:

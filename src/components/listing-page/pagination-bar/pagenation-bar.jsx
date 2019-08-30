@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { APP_CONSTANTS } from '../../../configs/constants';
+
 import './style.scss';
 
-const PaginationBarComponent = ({ page = 1, limit = 1, shipmentsLength = 0, changePage }) => {
+const PaginationBarComponent = ({ page = 1, shipmentsLength = 0, changePage }) => {
     return (
         <div className="pagination-bar">
             {page > 1 && (
@@ -16,7 +18,7 @@ const PaginationBarComponent = ({ page = 1, limit = 1, shipmentsLength = 0, chan
                 ></i>
             )}
             <span className="page-number">{page}</span>
-            {shipmentsLength >= limit && (
+            {shipmentsLength >= APP_CONSTANTS.PAGE_LIMIT && (
                 <i
                     className="fas fa-chevron-right next"
                     title="next"
@@ -31,7 +33,6 @@ const PaginationBarComponent = ({ page = 1, limit = 1, shipmentsLength = 0, chan
 
 PaginationBarComponent.propTypes = {
     page: PropTypes.number.isRequired,
-    limit: PropTypes.number.isRequired,
     shipmentsLength: PropTypes.number.isRequired,
     changePage: PropTypes.func.isRequired
 };
