@@ -43,24 +43,25 @@ export class DetailsComponent extends Component {
         } = shipment;
         return (
             <Fragment>
-                <main className="details-page">
-                    {loading && <div className="loading">Loading...</div>}
-                    <div className="details-container">
-                        <div className="action-bar">
-                            <Link to="/">
-                                <i className="fas fa-chevron-left chevron">{` Back`}</i>
+                <main className='details-page'>
+                    {/* TODO: Use React lazy & Suspense */}
+                    {loading && <div className='loading'>Loading...</div>}
+                    <div className='details-container'>
+                        <div className='action-bar'>
+                            <Link to='/'>
+                                <i className='fas fa-chevron-left chevron'>{` Back`}</i>
                             </Link>
-                            {!!shipment.id && <i className="far fa-edit edit" onClick={this.editName}>{` Edit`}</i>}
+                            {!!shipment.id && <i className='far fa-edit edit' onClick={this.editName}>{` Edit`}</i>}
                         </div>
                         {!error && !!shipment.id && (
-                            <div className="details">
-                                <div className="shipment-id">
+                            <div className='details'>
+                                <div className='shipment-id'>
                                     Shipment ID: <code>{id}</code>
                                 </div>
                                 <div>
                                     Customer ID: <code>{userId}</code>
                                 </div>
-                                <div className="name">
+                                <div className='name'>
                                     Name: <code>{name}</code>
                                 </div>
                                 <div>
